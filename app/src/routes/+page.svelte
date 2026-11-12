@@ -27,16 +27,16 @@
 		</p>
 
 		<div class="flex items-center justify-center gap-3 pt-4">
+			<a href="/products">
+				<Button size="lg">Jelajahi Katalog</Button>
+			</a>
 			{#if data.user}
 				<a href="/dashboard">
-					<Button size="lg">Buka Dashboard Pembeli</Button>
+					<Button variant="outline" size="lg">Dashboard</Button>
 				</a>
 			{:else}
 				<a href="/auth/register">
-					<Button size="lg">Daftar Akun</Button>
-				</a>
-				<a href="/auth/login">
-					<Button variant="outline" size="lg">Masuk</Button>
+					<Button variant="outline" size="lg">Daftar Akun</Button>
 				</a>
 			{/if}
 		</div>

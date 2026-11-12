@@ -44,6 +44,7 @@
 				</a>
 				<nav class="hidden items-center gap-4 text-sm font-medium text-muted-foreground sm:flex">
 					<a href="/" class="transition hover:text-foreground">Beranda</a>
+					<a href="/products" class="transition hover:text-foreground">Katalog</a>
 					<a href="/dashboard" class="transition hover:text-foreground">Dashboard</a>
 				</nav>
 			</div>
