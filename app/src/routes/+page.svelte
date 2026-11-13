@@ -17,7 +17,7 @@
 <section
 	class="relative overflow-hidden border-b border-border/60 bg-linear-to-b from-muted/30 via-background to-background py-16 sm:py-24"
 >
-	<div class="container mx-auto max-w-5xl px-4 text-center">
+	<div class="mx-auto max-w-6xl px-4 text-center sm:px-6">
 		<!-- Trust Badge Pill -->
 		<div
 			class="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3.5 py-1 text-xs font-medium text-foreground shadow-xs backdrop-blur"
@@ -300,7 +300,7 @@
 
 <!-- How It Works (Cara Kerja Sistem TokoUcan) -->
 <section id="cara-kerja" class="border-t border-border/60 py-16 sm:py-24">
-	<div class="container mx-auto max-w-5xl px-4 text-center sm:px-6">
+	<div class="mx-auto max-w-6xl px-4 text-center sm:px-6">
 		<span class="text-xs font-semibold tracking-wider text-primary uppercase"
 			>Transparan &amp; Terpercaya</span
 		>

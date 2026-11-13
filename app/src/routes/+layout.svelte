@@ -41,7 +41,7 @@
 			class="border-b border-amber-500/25 bg-amber-500/10 px-4 py-2 text-center text-xs text-amber-900 dark:text-amber-200"
 			role="status"
 		>
-			<div class="container mx-auto flex items-center justify-center gap-2">
+			<div class="mx-auto flex max-w-6xl items-center justify-center gap-2 px-4 sm:px-6">
 				<svg
 					class="size-4 shrink-0 text-amber-600 dark:text-amber-400"
 					fill="none"
@@ -64,11 +64,11 @@
 		</aside>
 	{/if}
 
-	<!-- Header / Navbar (Clean 3-Zone Architecture) -->
+	<!-- Header / Navbar (Selaras dengan lebar max-w-6xl body) -->
 	<header
 		class="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md transition-all"
 	>
-		<div class="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
+		<div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
 			<!-- Zona Kiri: Brand Identity -->
 			<div class="flex items-center">
 				<a
@@ -241,115 +241,118 @@
 		<!-- Mobile Navigation Drawer -->
 		{#if isMobileMenuOpen}
 			<div
-				class="animate-in space-y-4 border-b border-border bg-card/95 px-4 pt-3 pb-5 backdrop-blur-md duration-150 slide-in-from-top-2 md:hidden"
+				class="animate-in border-b border-border bg-card/95 backdrop-blur-md duration-150 slide-in-from-top-2 md:hidden"
 			>
-				<!-- Navigation Links -->
-				<nav class="flex flex-col space-y-1">
-					<a
-						href="/"
-						onclick={closeMobileMenu}
-						class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page
-							.url.pathname === '/'
-							? 'bg-primary/10 font-semibold text-primary'
-							: 'text-foreground hover:bg-muted'}"
-					>
-						<span>Beranda</span>
-						<svg
-							class="size-4 text-muted-foreground"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
+				<div class="mx-auto max-w-6xl space-y-4 px-4 pt-3 pb-5">
+					<!-- Navigation Links -->
+					<nav class="flex flex-col space-y-1">
+						<a
+							href="/"
+							onclick={closeMobileMenu}
+							class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page
+								.url.pathname === '/'
+								? 'bg-primary/10 font-semibold text-primary'
+								: 'text-foreground hover:bg-muted'}"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-					</a>
-					<a
-						href="/products"
-						onclick={closeMobileMenu}
-						class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
-							'/products'
-						)
-							? 'bg-primary/10 font-semibold text-primary'
-							: 'text-foreground hover:bg-muted'}"
-					>
-						<span>Katalog Produk</span>
-						<svg
-							class="size-4 text-muted-foreground"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
+							<span>Beranda</span>
+							<svg
+								class="size-4 text-muted-foreground"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 5l7 7-7 7"
+								/>
+							</svg>
+						</a>
+						<a
+							href="/products"
+							onclick={closeMobileMenu}
+							class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
+								'/products'
+							)
+								? 'bg-primary/10 font-semibold text-primary'
+								: 'text-foreground hover:bg-muted'}"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-					</a>
-					<a
-						href="/dashboard"
-						onclick={closeMobileMenu}
-						class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
-							'/dashboard'
-						)
-							? 'bg-primary/10 font-semibold text-primary'
-							: 'text-foreground hover:bg-muted'}"
-					>
-						<span>Dashboard Vault</span>
-						<svg
-							class="size-4 text-muted-foreground"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
+							<span>Katalog Produk</span>
+							<svg
+								class="size-4 text-muted-foreground"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 5l7 7-7 7"
+								/>
+							</svg>
+						</a>
+						<a
+							href="/dashboard"
+							onclick={closeMobileMenu}
+							class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
+								'/dashboard'
+							)
+								? 'bg-primary/10 font-semibold text-primary'
+								: 'text-foreground hover:bg-muted'}"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-					</a>
-				</nav>
+							<span>Dashboard Vault</span>
+							<svg
+								class="size-4 text-muted-foreground"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 5l7 7-7 7"
+								/>
+							</svg>
+						</a>
+					</nav>
 
-				<!-- Mobile Auth Actions -->
-				<div class="border-t border-border pt-3.5">
-					{#if data.user}
-						<div class="flex items-center justify-between gap-3">
-							<div class="flex items-center gap-2 truncate">
-								<span
-									class="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary"
-								>
-									{data.user.email ? data.user.email.charAt(0).toUpperCase() : 'U'}
-								</span>
-								<span class="truncate text-xs font-medium text-foreground">{data.user.email}</span>
+					<!-- Mobile Auth Actions -->
+					<div class="border-t border-border pt-3.5">
+						{#if data.user}
+							<div class="flex items-center justify-between gap-3">
+								<div class="flex items-center gap-2 truncate">
+									<span
+										class="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary"
+									>
+										{data.user.email ? data.user.email.charAt(0).toUpperCase() : 'U'}
+									</span>
+									<span class="truncate text-xs font-medium text-foreground">{data.user.email}</span
+									>
+								</div>
+								<form action="/auth/logout" method="POST" onsubmit={closeMobileMenu}>
+									<Button type="submit" variant="outline" size="sm" class="h-8 text-xs">
+										Keluar
+									</Button>
+								</form>
 							</div>
-							<form action="/auth/logout" method="POST" onsubmit={closeMobileMenu}>
-								<Button type="submit" variant="outline" size="sm" class="h-8 text-xs">
-									Keluar
-								</Button>
-							</form>
-						</div>
-					{:else}
-						<div class="grid grid-cols-2 gap-2.5">
-							<a href="/auth/login" onclick={closeMobileMenu}>
-								<Button variant="outline" size="sm" class="w-full text-xs font-medium">
-									Masuk
-								</Button>
-							</a>
-							<a href="/auth/register" onclick={closeMobileMenu}>
-								<Button variant="default" size="sm" class="w-full text-xs font-semibold">
-									Daftar Akun
-								</Button>
-							</a>
-						</div>
-					{/if}
+						{:else}
+							<div class="grid grid-cols-2 gap-2.5">
+								<a href="/auth/login" onclick={closeMobileMenu}>
+									<Button variant="outline" size="sm" class="w-full text-xs font-medium">
+										Masuk
+									</Button>
+								</a>
+								<a href="/auth/register" onclick={closeMobileMenu}>
+									<Button variant="default" size="sm" class="w-full text-xs font-semibold">
+										Daftar Akun
+									</Button>
+								</a>
+							</div>
+						{/if}
+					</div>
 				</div>
 			</div>
 		{/if}
@@ -360,9 +363,9 @@
 		{@render children()}
 	</main>
 
-	<!-- Clean Professional Footer -->
+	<!-- Clean Professional Footer (Selaras dengan lebar max-w-6xl body) -->
 	<footer class="border-t border-border/80 bg-card/40 text-muted-foreground">
-		<div class="container mx-auto px-4 py-12 sm:px-6">
+		<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
 			<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
 				<!-- Brand Column -->
 				<div class="space-y-3 lg:col-span-2">
