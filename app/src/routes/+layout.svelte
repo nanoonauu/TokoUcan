@@ -111,13 +111,13 @@
 			<!-- Zona Tengah: Centered Floating Navigation Pills (Desktop) -->
 			<nav
 				aria-label="Navigasi utama"
-				class="hidden items-center rounded-full border border-border/80 bg-muted/40 p-1 text-xs font-medium shadow-2xs backdrop-blur-xs md:flex"
+				class="hidden items-center rounded-full border border-border/80 bg-muted/50 p-1 text-xs font-medium shadow-2xs backdrop-blur-xs md:flex"
 			>
 				<a
 					href="/"
 					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname === '/'
-						? 'bg-background font-semibold text-foreground shadow-xs'
-						: 'text-muted-foreground hover:text-foreground'}"
+						? 'bg-primary font-semibold text-primary-foreground shadow-xs'
+						: 'text-muted-foreground hover:bg-background/80 hover:text-foreground'}"
 					aria-current={page.url.pathname === '/' ? 'page' : undefined}
 				>
 					Beranda
@@ -127,8 +127,8 @@
 					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname.startsWith(
 						'/products'
 					)
-						? 'bg-background font-semibold text-foreground shadow-xs'
-						: 'text-muted-foreground hover:text-foreground'}"
+						? 'bg-primary font-semibold text-primary-foreground shadow-xs'
+						: 'text-muted-foreground hover:bg-background/80 hover:text-foreground'}"
 					aria-current={page.url.pathname.startsWith('/products') ? 'page' : undefined}
 				>
 					Katalog
@@ -138,35 +138,16 @@
 					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname.startsWith(
 						'/dashboard'
 					)
-						? 'bg-background font-semibold text-foreground shadow-xs'
-						: 'text-muted-foreground hover:text-foreground'}"
+						? 'bg-primary font-semibold text-primary-foreground shadow-xs'
+						: 'text-muted-foreground hover:bg-background/80 hover:text-foreground'}"
 					aria-current={page.url.pathname.startsWith('/dashboard') ? 'page' : undefined}
 				>
 					Dashboard
 				</a>
 			</nav>
 
-			<!-- Zona Kanan: Action & Auth Controls -->
+			<!-- Zona Kanan: Auth Controls -->
 			<div class="hidden items-center gap-2.5 md:flex">
-				<!-- Quick Search Trigger -->
-				<a
-					href="/products"
-					class="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
-					title="Cari Produk di Katalog"
-					aria-label="Cari produk"
-				>
-					<svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-						/>
-					</svg>
-				</a>
-
-				<div class="h-4 w-px bg-border/80"></div>
-
 				{#if data.user}
 					<a
 						href="/dashboard"
@@ -177,7 +158,7 @@
 						>
 							{data.user.email ? data.user.email.charAt(0).toUpperCase() : 'U'}
 						</span>
-						<span class="max-w-[120px] truncate">
+						<span class="max-w-30 truncate">
 							{data.user.email?.split('@')[0]}
 						</span>
 					</a>
@@ -203,23 +184,8 @@
 				{/if}
 			</div>
 
-			<!-- Mobile Controls: Avatar / Hamburger -->
+			<!-- Mobile Controls: Hamburger -->
 			<div class="flex items-center gap-2 md:hidden">
-				<a
-					href="/products"
-					class="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted"
-					aria-label="Cari produk"
-				>
-					<svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-						/>
-					</svg>
-				</a>
-
 				<button
 					type="button"
 					class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-muted focus:ring-2 focus:ring-ring focus:outline-none"
@@ -265,13 +231,15 @@
 							onclick={closeMobileMenu}
 							class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page
 								.url.pathname === '/'
-								? 'bg-primary/10 font-semibold text-primary'
+								? 'bg-primary font-semibold text-primary-foreground shadow-xs'
 								: 'text-foreground hover:bg-muted'}"
 							aria-current={page.url.pathname === '/' ? 'page' : undefined}
 						>
 							<span>Beranda</span>
 							<svg
-								class="size-4 text-muted-foreground"
+								class="size-4 {page.url.pathname === '/'
+									? 'text-primary-foreground'
+									: 'text-muted-foreground'}"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -290,13 +258,15 @@
 							class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
 								'/products'
 							)
-								? 'bg-primary/10 font-semibold text-primary'
+								? 'bg-primary font-semibold text-primary-foreground shadow-xs'
 								: 'text-foreground hover:bg-muted'}"
 							aria-current={page.url.pathname.startsWith('/products') ? 'page' : undefined}
 						>
 							<span>Katalog Produk</span>
 							<svg
-								class="size-4 text-muted-foreground"
+								class="size-4 {page.url.pathname.startsWith('/products')
+									? 'text-primary-foreground'
+									: 'text-muted-foreground'}"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -315,13 +285,15 @@
 							class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
 								'/dashboard'
 							)
-								? 'bg-primary/10 font-semibold text-primary'
+								? 'bg-primary font-semibold text-primary-foreground shadow-xs'
 								: 'text-foreground hover:bg-muted'}"
 							aria-current={page.url.pathname.startsWith('/dashboard') ? 'page' : undefined}
 						>
 							<span>Dashboard Vault</span>
 							<svg
-								class="size-4 text-muted-foreground"
+								class="size-4 {page.url.pathname.startsWith('/dashboard')
+									? 'text-primary-foreground'
+									: 'text-muted-foreground'}"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
