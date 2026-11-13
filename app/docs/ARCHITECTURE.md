@@ -55,3 +55,11 @@ Dokumen ini mendefinisikan batasan arsitektur frontend dan backend, alur autenti
 - **Integrasi Pembayaran (`src/lib/server/modules/payment.ts`)**: Batas interface untuk webhook idempotency & cryptographic signature validation Midtrans/Xendit.
 - **Pengiriman Otomatis (`src/lib/server/modules/delivery.ts`)**: Batas interface untuk alokasi stok transaksional dengan row-level lock.
 - **Pembersihan Retensi 30 Hari (`src/lib/server/modules/retention.ts`)**: Batas interface worker scheduled cron yang memusnahkan ciphertext kredensial tepat 30 hari pasca serah terima.
+
+## 4. Standar UI/UX, Semantic HTML & Aksesibilitas
+
+Setiap antarmuka pengguna (UI) di TokoUcan wajib mematuhi standar yang terdokumentasi di [docs/FRONTEND_STANDARDS.md](FRONTEND_STANDARDS.md):
+
+- **Semantic HTML**: Wajib menggunakan landmark (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`) dan heading hierarkis (`<h1>`-`<h3>`).
+- **Aksesibilitas ARIA**: Tombol ikonik wajib menyertakan `aria-label`, seluruh input wajib memiliki label terasosiasi, grup navigasi ganda wajib diberi label pembeda, dan status dinamis wajib mencantumkan atribut ARIA (`aria-expanded`, `aria-current="page"`).
+- **Keyboard & Focus**: Wajib memiliki skip-link dan indikator fokus yang terlihat jelas (`focus-visible:ring-2`).

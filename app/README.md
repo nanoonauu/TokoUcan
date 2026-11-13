@@ -17,8 +17,13 @@ tokoucan/
 ├── .gitignore            # Root ignore (hanya /app yang ditrack ke GitHub)
 ├── accountra/            # Starter pack & requirements (diabaikan dari Git)
 └── app/                  # Sumber kode project TokoUcan (SvelteKit)
-    ├── docs/             # Dokumentasi arsitektur, database, keamanan, dan status
-    ├── src/
+    ├── AGENTS.md         # Pedoman instruksi AI coding agents
+    ├── docs/             # Dokumentasi arsitektur, standar frontend/a11y, database, keamanan
+    │   ├── FRONTEND_STANDARDS.md # Standar wajib Semantic HTML & Aksesibilitas (WCAG)
+    │   ├── ARCHITECTURE.md
+    │   ├── DATABASE.md
+    │   ├── DEVELOPMENT_STATUS.md
+    │   └── SECURITY.md
     │   ├── lib/
     │   │   ├── components/ui/  # shadcn-svelte UI components
     │   │   ├── schemas/        # Zod validation schemas
