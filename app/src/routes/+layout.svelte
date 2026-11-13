@@ -33,12 +33,12 @@
 </script>
 
 <div
-	class="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased selection:bg-primary/20 selection:text-foreground"
+	class="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased selection:bg-primary/15 selection:text-foreground"
 >
-	<!-- Environment Warning Banner (Subtle & Informative) -->
+	<!-- Environment Status Banner (Hanya muncul jika Supabase belum disetel) -->
 	{#if !data.envValidation.isConfigured}
-		<div
-			class="border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-center text-xs text-amber-900 dark:text-amber-200"
+		<aside
+			class="border-b border-amber-500/25 bg-amber-500/10 px-4 py-2 text-center text-xs text-amber-900 dark:text-amber-200"
 			role="status"
 		>
 			<div class="container mx-auto flex items-center justify-center gap-2">
@@ -56,32 +56,31 @@
 					/>
 				</svg>
 				<span>
-					<strong>Pengaturan Awal:</strong> Supabase environment variables belum lengkap ({data.envValidation.missingPublic.join(
-						', '
-					)}). Buka file <code class="rounded bg-amber-500/20 px-1 py-0.5 font-mono">.env</code> untuk
-					melengkapi.
+					<strong>Supabase Belum Dikonfigurasi:</strong> Lengkapi kredensial di file
+					<code class="rounded bg-amber-500/20 px-1 py-0.5 font-mono">.env</code> untuk mengaktifkan autentikasi
+					database.
 				</span>
 			</div>
-		</div>
+		</aside>
 	{/if}
 
-	<!-- Sticky Header / Navbar -->
+	<!-- Header / Navbar (Clean 3-Zone Architecture) -->
 	<header
 		class="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md transition-all"
 	>
-		<div class="container mx-auto flex h-16 items-center justify-between gap-4 px-4 sm:px-6">
-			<!-- Brand Logo -->
-			<div class="flex items-center gap-6">
+		<div class="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
+			<!-- Zona Kiri: Brand Identity -->
+			<div class="flex items-center">
 				<a
 					href="/"
 					class="flex items-center gap-2.5 rounded-lg transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 					onclick={closeMobileMenu}
 				>
 					<div
-						class="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm"
+						class="flex size-8.5 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-xs"
 					>
 						<svg
-							class="size-5"
+							class="size-4.5"
 							viewBox="0 0 24 24"
 							fill="none"
 							stroke="currentColor"
@@ -94,64 +93,57 @@
 							<path d="M2 12l10 5 10-5" />
 						</svg>
 					</div>
-					<div class="flex flex-col text-left">
-						<span class="text-base leading-tight font-bold tracking-tight text-foreground"
-							>TokoUcan</span
-						>
-						<span class="text-[10px] leading-none font-medium text-muted-foreground"
-							>Digital Marketplace</span
-						>
+					<div class="flex items-baseline gap-1">
+						<span class="text-lg font-extrabold tracking-tight text-foreground">TokoUcan</span>
+						<span class="size-1.5 rounded-full bg-brand-gold"></span>
 					</div>
 				</a>
-
-				<!-- Desktop Navigation Links -->
-				<nav class="hidden items-center gap-1 text-sm font-medium md:flex">
-					<a
-						href="/"
-						class="rounded-md px-3 py-1.5 transition-colors {page.url.pathname === '/'
-							? 'bg-muted font-semibold text-foreground'
-							: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'}"
-					>
-						Beranda
-					</a>
-					<a
-						href="/products"
-						class="rounded-md px-3 py-1.5 transition-colors {page.url.pathname.startsWith(
-							'/products'
-						)
-							? 'bg-muted font-semibold text-foreground'
-							: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'}"
-					>
-						Katalog
-					</a>
-					<a
-						href="/dashboard"
-						class="rounded-md px-3 py-1.5 transition-colors {page.url.pathname.startsWith(
-							'/dashboard'
-						)
-							? 'bg-muted font-semibold text-foreground'
-							: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'}"
-					>
-						Dashboard
-					</a>
-				</nav>
 			</div>
 
-			<!-- Center/Right Search Bar (Desktop) -->
-			<div class="mx-4 hidden max-w-xs flex-1 lg:flex">
-				<form action="/products" method="GET" class="relative w-full">
-					<input
-						type="search"
-						name="search"
-						placeholder="Cari lisensi, akun, software..."
-						class="h-9 w-full rounded-lg border border-input bg-muted/40 pr-3 pl-8 text-xs text-foreground placeholder:text-muted-foreground focus:bg-background focus:ring-2 focus:ring-ring focus:outline-none"
-					/>
-					<svg
-						class="absolute top-2.5 left-2.5 size-4 text-muted-foreground"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
+			<!-- Zona Tengah: Centered Floating Navigation Pills (Desktop) -->
+			<nav
+				class="hidden items-center rounded-full border border-border/80 bg-muted/40 p-1 text-xs font-medium shadow-2xs backdrop-blur-xs md:flex"
+			>
+				<a
+					href="/"
+					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname === '/'
+						? 'bg-background font-semibold text-foreground shadow-xs'
+						: 'text-muted-foreground hover:text-foreground'}"
+				>
+					Beranda
+				</a>
+				<a
+					href="/products"
+					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname.startsWith(
+						'/products'
+					)
+						? 'bg-background font-semibold text-foreground shadow-xs'
+						: 'text-muted-foreground hover:text-foreground'}"
+				>
+					Katalog
+				</a>
+				<a
+					href="/dashboard"
+					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname.startsWith(
+						'/dashboard'
+					)
+						? 'bg-background font-semibold text-foreground shadow-xs'
+						: 'text-muted-foreground hover:text-foreground'}"
+				>
+					Dashboard
+				</a>
+			</nav>
+
+			<!-- Zona Kanan: Action & Auth Controls -->
+			<div class="hidden items-center gap-2.5 md:flex">
+				<!-- Quick Search Trigger -->
+				<a
+					href="/products"
+					class="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
+					title="Cari Produk di Katalog"
+					aria-label="Cari produk"
+				>
+					<svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -159,59 +151,72 @@
 							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 						/>
 					</svg>
-				</form>
-			</div>
+				</a>
 
-			<!-- User Profile / Auth Action (Desktop) -->
-			<div class="hidden items-center gap-3 md:flex">
+				<div class="h-4 w-px bg-border/80"></div>
+
 				{#if data.user}
 					<a
 						href="/dashboard"
-						class="flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-foreground transition-colors hover:bg-muted"
+						class="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground transition-all hover:border-primary/40 hover:shadow-2xs"
 					>
-						<div
-							class="flex size-5 items-center justify-center rounded-full bg-primary/20 text-[10px] font-bold text-primary"
+						<span
+							class="flex size-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary"
 						>
 							{data.user.email ? data.user.email.charAt(0).toUpperCase() : 'U'}
-						</div>
-						<span class="max-w-[140px] truncate font-medium">
+						</span>
+						<span class="max-w-[120px] truncate">
 							{data.user.email?.split('@')[0]}
 						</span>
 					</a>
 					<form action="/auth/logout" method="POST">
-						<Button type="submit" variant="outline" size="sm" class="h-8 text-xs">Keluar</Button>
+						<Button
+							type="submit"
+							variant="ghost"
+							size="sm"
+							class="h-8 text-xs font-medium text-muted-foreground hover:text-destructive"
+						>
+							Keluar
+						</Button>
 					</form>
 				{:else}
 					<a href="/auth/login">
-						<Button variant="ghost" size="sm" class="h-8 text-xs font-medium">Masuk</Button>
+						<Button variant="ghost" size="sm" class="h-8 px-3 text-xs font-medium">Masuk</Button>
 					</a>
 					<a href="/auth/register">
-						<Button variant="default" size="sm" class="h-8 text-xs font-medium shadow-sm">
-							Daftar Akun
+						<Button variant="default" size="sm" class="h-8 px-3.5 text-xs font-semibold shadow-xs">
+							Daftar
 						</Button>
 					</a>
 				{/if}
 			</div>
 
-			<!-- Mobile Hamburger Button -->
+			<!-- Mobile Controls: Avatar / Hamburger -->
 			<div class="flex items-center gap-2 md:hidden">
-				{#if data.user}
-					<a
-						href="/dashboard"
-						class="flex size-8 items-center justify-center rounded-full bg-primary/20 text-xs font-bold text-primary"
-					>
-						{data.user.email ? data.user.email.charAt(0).toUpperCase() : 'U'}
-					</a>
-				{/if}
+				<a
+					href="/products"
+					class="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted"
+					aria-label="Cari produk"
+				>
+					<svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+						/>
+					</svg>
+				</a>
+
 				<button
 					type="button"
-					class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card p-2 text-foreground transition-colors hover:bg-muted focus:ring-2 focus:ring-ring focus:outline-none"
+					class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-muted focus:ring-2 focus:ring-ring focus:outline-none"
 					onclick={toggleMobileMenu}
 					aria-expanded={isMobileMenuOpen}
-					aria-label="Toggle navigasi menu"
+					aria-label="Buka menu navigasi"
 				>
 					{#if isMobileMenuOpen}
-						<svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<svg class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -220,7 +225,7 @@
 							/>
 						</svg>
 					{:else}
-						<svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<svg class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -236,107 +241,112 @@
 		<!-- Mobile Navigation Drawer -->
 		{#if isMobileMenuOpen}
 			<div
-				class="animate-in space-y-4 border-b border-border bg-card px-4 pt-3 pb-5 duration-200 slide-in-from-top-2 md:hidden"
+				class="animate-in space-y-4 border-b border-border bg-card/95 px-4 pt-3 pb-5 backdrop-blur-md duration-150 slide-in-from-top-2 md:hidden"
 			>
-				<!-- Search Bar in Mobile -->
-				<form action="/products" method="GET" class="relative w-full" onsubmit={closeMobileMenu}>
-					<input
-						type="search"
-						name="search"
-						placeholder="Cari produk digital..."
-						class="h-9 w-full rounded-lg border border-input bg-background pr-3 pl-8 text-xs text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:outline-none"
-					/>
-					<svg
-						class="absolute top-2.5 left-2.5 size-4 text-muted-foreground"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-						/>
-					</svg>
-				</form>
-
-				<!-- Nav Links in Mobile -->
+				<!-- Navigation Links -->
 				<nav class="flex flex-col space-y-1">
 					<a
 						href="/"
 						onclick={closeMobileMenu}
-						class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors {page
+						class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page
 							.url.pathname === '/'
 							? 'bg-primary/10 font-semibold text-primary'
 							: 'text-foreground hover:bg-muted'}"
 					>
-						<svg class="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<span>Beranda</span>
+						<svg
+							class="size-4 text-muted-foreground"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+								d="M9 5l7 7-7 7"
 							/>
 						</svg>
-						Beranda
 					</a>
 					<a
 						href="/products"
 						onclick={closeMobileMenu}
-						class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors {page.url.pathname.startsWith(
+						class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
 							'/products'
 						)
 							? 'bg-primary/10 font-semibold text-primary'
 							: 'text-foreground hover:bg-muted'}"
 					>
-						<svg class="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<span>Katalog Produk</span>
+						<svg
+							class="size-4 text-muted-foreground"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+								d="M9 5l7 7-7 7"
 							/>
 						</svg>
-						Katalog Produk
 					</a>
 					<a
 						href="/dashboard"
 						onclick={closeMobileMenu}
-						class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors {page.url.pathname.startsWith(
+						class="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors {page.url.pathname.startsWith(
 							'/dashboard'
 						)
 							? 'bg-primary/10 font-semibold text-primary'
 							: 'text-foreground hover:bg-muted'}"
 					>
-						<svg class="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<span>Dashboard Vault</span>
+						<svg
+							class="size-4 text-muted-foreground"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+								d="M9 5l7 7-7 7"
 							/>
 						</svg>
-						Dashboard Vault
 					</a>
 				</nav>
 
-				<!-- Auth in Mobile -->
-				<div class="border-t border-border/80 pt-3">
+				<!-- Mobile Auth Actions -->
+				<div class="border-t border-border pt-3.5">
 					{#if data.user}
-						<div class="flex items-center justify-between pb-2">
-							<span class="truncate text-xs text-muted-foreground">{data.user.email}</span>
+						<div class="flex items-center justify-between gap-3">
+							<div class="flex items-center gap-2 truncate">
+								<span
+									class="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary"
+								>
+									{data.user.email ? data.user.email.charAt(0).toUpperCase() : 'U'}
+								</span>
+								<span class="truncate text-xs font-medium text-foreground">{data.user.email}</span>
+							</div>
 							<form action="/auth/logout" method="POST" onsubmit={closeMobileMenu}>
-								<Button type="submit" variant="outline" size="sm" class="text-xs">Keluar</Button>
+								<Button type="submit" variant="outline" size="sm" class="h-8 text-xs">
+									Keluar
+								</Button>
 							</form>
 						</div>
 					{:else}
-						<div class="grid grid-cols-2 gap-2">
+						<div class="grid grid-cols-2 gap-2.5">
 							<a href="/auth/login" onclick={closeMobileMenu}>
-								<Button variant="outline" size="sm" class="w-full text-xs">Masuk</Button>
+								<Button variant="outline" size="sm" class="w-full text-xs font-medium">
+									Masuk
+								</Button>
 							</a>
 							<a href="/auth/register" onclick={closeMobileMenu}>
-								<Button variant="default" size="sm" class="w-full text-xs">Daftar Akun</Button>
+								<Button variant="default" size="sm" class="w-full text-xs font-semibold">
+									Daftar Akun
+								</Button>
 							</a>
 						</div>
 					{/if}
@@ -350,13 +360,13 @@
 		{@render children()}
 	</main>
 
-	<!-- Comprehensive Modern Footer -->
-	<footer class="border-t border-border bg-card/40 text-muted-foreground">
+	<!-- Clean Professional Footer -->
+	<footer class="border-t border-border/80 bg-card/40 text-muted-foreground">
 		<div class="container mx-auto px-4 py-12 sm:px-6">
 			<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-				<!-- Brand Col -->
+				<!-- Brand Column -->
 				<div class="space-y-3 lg:col-span-2">
-					<div class="flex items-center gap-2.5">
+					<div class="flex items-center gap-2">
 						<div
 							class="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground"
 						>
@@ -383,12 +393,12 @@
 					<div
 						class="flex items-center gap-2 pt-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400"
 					>
-						<span class="size-2 animate-pulse rounded-full bg-emerald-500"></span>
-						Sistem Operasional &amp; Pengiriman Aktif
+						<span class="size-2 rounded-full bg-emerald-500"></span>
+						Sistem Operasional &amp; Pengiriman Siap
 					</div>
 				</div>
 
-				<!-- Marketplace Col -->
+				<!-- Links: Marketplace -->
 				<div class="space-y-2.5">
 					<p class="text-xs font-semibold tracking-wider text-foreground uppercase">Marketplace</p>
 					<ul class="space-y-1.5 text-xs">
@@ -416,7 +426,7 @@
 					</ul>
 				</div>
 
-				<!-- Keamanan Col -->
+				<!-- Links: Security -->
 				<div class="space-y-2.5">
 					<p class="text-xs font-semibold tracking-wider text-foreground uppercase">
 						Keamanan &amp; Data
@@ -429,7 +439,7 @@
 					</ul>
 				</div>
 
-				<!-- Akun Col -->
+				<!-- Links: Account -->
 				<div class="space-y-2.5">
 					<p class="text-xs font-semibold tracking-wider text-foreground uppercase">Akun Pembeli</p>
 					<ul class="space-y-1.5 text-xs">
@@ -455,7 +465,7 @@
 				</div>
 			</div>
 
-			<!-- Bottom Copyright Bar -->
+			<!-- Bottom Bar -->
 			<div
 				class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-xs text-muted-foreground/80 sm:flex-row"
 			>
