@@ -21,6 +21,9 @@ Thumbs.db
 # Docs (Local only)
 /docs/
 
+# Local scripts
+/scripts/
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
