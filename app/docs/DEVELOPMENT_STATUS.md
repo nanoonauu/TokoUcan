@@ -6,6 +6,7 @@
 ## 1. Item Selesai (Completed)
 
 ### Phase 0: Project & Backend Foundation
+
 - [x] Inisialisasi SvelteKit 3 + TypeScript pada folder `/tokoucan/app`.
 - [x] Konfigurasi Tailwind CSS v4 dan shadcn-svelte komponen (`button`).
 - [x] Konfigurasi ESLint, Prettier, dan TypeScript strict mode.
@@ -17,6 +18,7 @@
 - [x] Skema migrasi database awal: `profiles` dan `user_roles` dengan RLS ketat.
 
 ### Phase 1: Marketplace Catalog
+
 - [x] Skema migrasi database: `categories` dan `products` (`supabase/migrations/20261112000001_catalog_schema.sql`).
 - [x] RLS policies catalog: publik hanya dapat membaca `published` & `is_active`, write terbatas untuk admin.
 - [x] Skema validasi Zod untuk kategori, produk, dan parameter pencarian katalog (`src/lib/schemas/catalog.ts`).
@@ -34,8 +36,8 @@
 
 ## 3. Hasil Validasi Kode Lokal (Automated Tests & Checks)
 
-| Perintah | Hasil | Keterangan |
-|---|---|---|
-| `pnpm check` | **LULUS** (0 error, 0 warning) | Tipe data TypeScript SvelteKit 3 sinkron |
-| `pnpm lint` | **LULUS** | Prettier & ESLint bebas peringatan |
-| `pnpm build` | **LULUS** | Bundle produksi client & SSR berhasil dibangun |
+| Perintah     | Hasil                          | Keterangan                                     |
+| ------------ | ------------------------------ | ---------------------------------------------- |
+| `pnpm check` | **LULUS** (0 error, 0 warning) | Tipe data TypeScript SvelteKit 3 sinkron       |
+| `pnpm lint`  | **LULUS**                      | Prettier & ESLint bebas peringatan             |
+| `pnpm build` | **LULUS**                      | Bundle produksi client & SSR berhasil dibangun |
