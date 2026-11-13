@@ -11,7 +11,8 @@ export const categorySchema = z.object({
 	sort_order: z.number().int().default(0),
 	is_active: z.boolean().default(true),
 	created_at: z.string(),
-	updated_at: z.string()
+	updated_at: z.string(),
+	product_count: z.number().int().optional()
 });
 
 export const productSchema = z.object({
@@ -33,6 +34,8 @@ export const catalogQuerySchema = z.object({
 	category: z.string().optional(),
 	search: z.string().optional(),
 	sort: z.enum(['newest', 'price-asc', 'price-desc']).default('newest'),
+	min_price: z.coerce.number().int().min(0).optional(),
+	max_price: z.coerce.number().int().min(0).optional(),
 	page: z.coerce.number().int().min(1).default(1),
 	limit: z.coerce.number().int().min(1).max(50).default(12)
 });

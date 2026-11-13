@@ -10,21 +10,37 @@ export interface CatalogResult {
 }
 
 /**
- * Fetch active categories sorted by sort_order.
+ * Fetch active categories sorted by sort_order with published product count.
  */
 export async function getActiveCategories(supabase: SupabaseClient): Promise<Category[]> {
 	try {
 		const { data, error } = await supabase
 			.from('categories')
-			.select('*')
+			.select('*, products(count)')
 			.eq('is_active', true)
+			.eq('products.status', 'published')
 			.order('sort_order', { ascending: true });
 
 		if (error || !data) {
 			return [];
 		}
 
-		return data as Category[];
+		return data.map((item) => {
+			const countArr = item.products as Array<{ count?: number }> | undefined;
+			const product_count = Array.isArray(countArr) && countArr[0]?.count ? countArr[0].count : 0;
+			return {
+				id: item.id,
+				name: item.name,
+				slug: item.slug,
+				description: item.description,
+				icon: item.icon,
+				sort_order: item.sort_order,
+				is_active: item.is_active,
+				created_at: item.created_at,
+				updated_at: item.updated_at,
+				product_count
+			} as Category;
+		});
 	} catch {
 		return [];
 	}
@@ -37,7 +53,7 @@ export async function getPublishedProducts(
 	supabase: SupabaseClient,
 	query: CatalogQuery
 ): Promise<CatalogResult> {
-	const { category, search, sort = 'newest', page = 1, limit = 12 } = query;
+	const { category, search, sort = 'newest', min_price, max_price, page = 1, limit = 12 } = query;
 	const from = (page - 1) * limit;
 	const to = from + limit - 1;
 
@@ -70,6 +86,14 @@ export async function getPublishedProducts(
 
 		if (search && search.trim()) {
 			dbQuery = dbQuery.ilike('title', `%${search.trim()}%`);
+		}
+
+		if (typeof min_price === 'number' && min_price > 0) {
+			dbQuery = dbQuery.gte('price', min_price);
+		}
+
+		if (typeof max_price === 'number' && max_price > 0) {
+			dbQuery = dbQuery.lte('price', max_price);
 		}
 
 		if (sort === 'price-asc') {
