@@ -43,14 +43,17 @@
 			<form
 				action="/products"
 				method="GET"
+				role="search"
 				class="flex items-center gap-2 rounded-xl border border-border bg-card p-2 shadow-sm transition-all focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/20"
 			>
 				<div class="relative flex-1">
+					<label for="hero-search" class="sr-only">Cari produk digital</label>
 					<svg
 						class="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
+						aria-hidden="true"
 					>
 						<path
 							stroke-linecap="round"
@@ -60,6 +63,7 @@
 						/>
 					</svg>
 					<input
+						id="hero-search"
 						type="search"
 						name="search"
 						placeholder="Cari produk: Office 365, Canva Pro, JetBrains..."
@@ -97,8 +101,8 @@
 		</div>
 
 		<!-- 4 Value Pillars -->
-		<div class="mt-14 grid grid-cols-2 gap-4 text-left sm:grid-cols-4">
-			<div class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
+		<ul class="mt-14 grid grid-cols-2 gap-4 text-left sm:grid-cols-4">
+			<li class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
 				<div
 					class="mb-2.5 flex size-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
 				>
@@ -111,13 +115,13 @@
 						/>
 					</svg>
 				</div>
-				<h3 class="text-xs font-semibold text-foreground">100% Sah &amp; Legal</h3>
+				<h2 class="text-xs font-semibold text-foreground">100% Sah &amp; Legal</h2>
 				<p class="mt-1 text-[11px] leading-relaxed text-muted-foreground">
 					Sesuai ketentuan transferability penyedia resmi.
 				</p>
-			</div>
+			</li>
 
-			<div class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
+			<li class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
 				<div
 					class="mb-2.5 flex size-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400"
 				>
@@ -130,13 +134,13 @@
 						/>
 					</svg>
 				</div>
-				<h3 class="text-xs font-semibold text-foreground">Serah Terima Instan</h3>
+				<h2 class="text-xs font-semibold text-foreground">Serah Terima Instan</h2>
 				<p class="mt-1 text-[11px] leading-relaxed text-muted-foreground">
 					Alokasi stok otomatis tepat setelah verifikasi bayar.
 				</p>
-			</div>
+			</li>
 
-			<div class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
+			<li class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
 				<div
 					class="mb-2.5 flex size-8 items-center justify-center rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400"
 				>
@@ -149,13 +153,13 @@
 						/>
 					</svg>
 				</div>
-				<h3 class="text-xs font-semibold text-foreground">Vault Terenkripsi</h3>
+				<h2 class="text-xs font-semibold text-foreground">Vault Terenkripsi</h2>
 				<p class="mt-1 text-[11px] leading-relaxed text-muted-foreground">
 					Kredensial disimpan aman dengan enkripsi AES-256.
 				</p>
-			</div>
+			</li>
 
-			<div class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
+			<li class="rounded-xl border border-border/80 bg-card/60 p-4 shadow-2xs backdrop-blur-xs">
 				<div
 					class="mb-2.5 flex size-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400"
 				>
@@ -168,12 +172,12 @@
 						/>
 					</svg>
 				</div>
-				<h3 class="text-xs font-semibold text-foreground">Retensi 30 Hari</h3>
+				<h2 class="text-xs font-semibold text-foreground">Retensi 30 Hari</h2>
 				<p class="mt-1 text-[11px] leading-relaxed text-muted-foreground">
 					Pemusnahan permanen data sensitif demi privasi Anda.
 				</p>
-			</div>
-		</div>
+			</li>
+		</ul>
 	</div>
 </section>
 
@@ -312,49 +316,52 @@
 			otomatis dan perlindungan privasi.
 		</p>
 
-		<div class="mt-12 grid gap-8 text-left sm:grid-cols-3">
+		<ol class="mt-12 grid gap-8 text-left sm:grid-cols-3">
 			<!-- Step 1 -->
-			<div class="relative rounded-xl border border-border bg-card p-6 shadow-xs">
+			<li class="relative rounded-xl border border-border bg-card p-6 shadow-xs">
 				<div
 					class="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground"
+					aria-hidden="true"
 				>
 					1
 				</div>
-				<h3 class="text-base font-semibold text-foreground">Pilih Produk &amp; Bayar Aman</h3>
+				<h3 class="text-base font-semibold text-foreground">1. Pilih Produk &amp; Bayar Aman</h3>
 				<p class="mt-2 text-xs leading-relaxed text-muted-foreground">
 					Pilih lisensi atau akun kerja yang sah dipindahtangankan. Lakukan pembayaran resmi melalui
 					gateway pembayaran tepercaya.
 				</p>
-			</div>
+			</li>
 
 			<!-- Step 2 -->
-			<div class="relative rounded-xl border border-border bg-card p-6 shadow-xs">
+			<li class="relative rounded-xl border border-border bg-card p-6 shadow-xs">
 				<div
 					class="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground"
+					aria-hidden="true"
 				>
 					2
 				</div>
-				<h3 class="text-base font-semibold text-foreground">Serah Terima Otomatis</h3>
+				<h3 class="text-base font-semibold text-foreground">2. Serah Terima Otomatis</h3>
 				<p class="mt-2 text-xs leading-relaxed text-muted-foreground">
 					Server memverifikasi pembayaran secara otomatis dan mengalokasikan akun ke dalam Vault
 					Akun pribadi Anda tanpa menunggu admin manual.
 				</p>
-			</div>
+			</li>
 
 			<!-- Step 3 -->
-			<div class="relative rounded-xl border border-border bg-card p-6 shadow-xs">
+			<li class="relative rounded-xl border border-border bg-card p-6 shadow-xs">
 				<div
 					class="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground"
+					aria-hidden="true"
 				>
 					3
 				</div>
-				<h3 class="text-base font-semibold text-foreground">Vault Aman &amp; Retensi 30 Hari</h3>
+				<h3 class="text-base font-semibold text-foreground">3. Vault Aman &amp; Retensi 30 Hari</h3>
 				<p class="mt-2 text-xs leading-relaxed text-muted-foreground">
 					Kredensial Anda dienkripsi AES-256. Sistem kami menjadwalkan pembersihan permanen setelah
 					30 hari demi menjaga privasi data Anda.
 				</p>
-			</div>
-		</div>
+			</li>
+		</ol>
 
 		<!-- Safety & Policy Compliance Callout -->
 		<div

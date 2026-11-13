@@ -52,7 +52,9 @@
 		</div>
 
 		<div class="flex gap-2 sm:col-span-3">
+			<label for="sort" class="sr-only">Urutkan produk</label>
 			<select
+				id="sort"
 				name="sort"
 				class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
 			>
@@ -76,7 +78,10 @@
 
 		<!-- Pagination -->
 		{#if data.catalogResult.totalPages > 1}
-			<div class="mt-10 flex items-center justify-center gap-2">
+			<nav
+				aria-label="Navigasi halaman katalog"
+				class="mt-10 flex items-center justify-center gap-2"
+			>
 				{#each Array.from({ length: data.catalogResult.totalPages }, (_, i) => i + 1) as pageNum (pageNum)}
 					<a
 						href="?page={pageNum}{data.query.category
@@ -84,13 +89,15 @@
 							: ''}{data.query.search
 							? `&search=${encodeURIComponent(data.query.search)}`
 							: ''}&sort={data.query.sort}"
+						aria-label="Halaman {pageNum}"
+						aria-current={data.catalogResult.page === pageNum ? 'page' : undefined}
 					>
 						<Button variant={data.catalogResult.page === pageNum ? 'default' : 'outline'} size="sm">
 							{pageNum}
 						</Button>
 					</a>
 				{/each}
-			</div>
+			</nav>
 		{/if}
 	{:else}
 		<!-- Empty State -->

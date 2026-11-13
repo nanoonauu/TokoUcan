@@ -35,6 +35,14 @@
 <div
 	class="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased selection:bg-primary/15 selection:text-foreground"
 >
+	<!-- Skip to Content Link (Aksesibilitas Keyboard / Screen Reader) -->
+	<a
+		href="#main-content"
+		class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-xs focus:font-semibold focus:text-primary-foreground focus:shadow-md focus:ring-2 focus:ring-ring focus:outline-none"
+	>
+		Lewati ke konten utama
+	</a>
+
 	<!-- Environment Status Banner (Hanya muncul jika Supabase belum disetel) -->
 	{#if !data.envValidation.isConfigured}
 		<aside
@@ -102,6 +110,7 @@
 
 			<!-- Zona Tengah: Centered Floating Navigation Pills (Desktop) -->
 			<nav
+				aria-label="Navigasi utama"
 				class="hidden items-center rounded-full border border-border/80 bg-muted/40 p-1 text-xs font-medium shadow-2xs backdrop-blur-xs md:flex"
 			>
 				<a
@@ -109,6 +118,7 @@
 					class="rounded-full px-4 py-1.5 transition-all duration-150 {page.url.pathname === '/'
 						? 'bg-background font-semibold text-foreground shadow-xs'
 						: 'text-muted-foreground hover:text-foreground'}"
+					aria-current={page.url.pathname === '/' ? 'page' : undefined}
 				>
 					Beranda
 				</a>
@@ -119,6 +129,7 @@
 					)
 						? 'bg-background font-semibold text-foreground shadow-xs'
 						: 'text-muted-foreground hover:text-foreground'}"
+					aria-current={page.url.pathname.startsWith('/products') ? 'page' : undefined}
 				>
 					Katalog
 				</a>
@@ -129,6 +140,7 @@
 					)
 						? 'bg-background font-semibold text-foreground shadow-xs'
 						: 'text-muted-foreground hover:text-foreground'}"
+					aria-current={page.url.pathname.startsWith('/dashboard') ? 'page' : undefined}
 				>
 					Dashboard
 				</a>
@@ -213,7 +225,8 @@
 					class="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-muted focus:ring-2 focus:ring-ring focus:outline-none"
 					onclick={toggleMobileMenu}
 					aria-expanded={isMobileMenuOpen}
-					aria-label="Buka menu navigasi"
+					aria-controls="mobile-nav"
+					aria-label={isMobileMenuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
 				>
 					{#if isMobileMenuOpen}
 						<svg class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -241,11 +254,12 @@
 		<!-- Mobile Navigation Drawer -->
 		{#if isMobileMenuOpen}
 			<div
+				id="mobile-nav"
 				class="animate-in border-b border-border bg-card/95 backdrop-blur-md duration-150 slide-in-from-top-2 md:hidden"
 			>
 				<div class="mx-auto max-w-6xl space-y-4 px-4 pt-3 pb-5">
 					<!-- Navigation Links -->
-					<nav class="flex flex-col space-y-1">
+					<nav aria-label="Navigasi menu seluler" class="flex flex-col space-y-1">
 						<a
 							href="/"
 							onclick={closeMobileMenu}
@@ -253,6 +267,7 @@
 								.url.pathname === '/'
 								? 'bg-primary/10 font-semibold text-primary'
 								: 'text-foreground hover:bg-muted'}"
+							aria-current={page.url.pathname === '/' ? 'page' : undefined}
 						>
 							<span>Beranda</span>
 							<svg
@@ -277,6 +292,7 @@
 							)
 								? 'bg-primary/10 font-semibold text-primary'
 								: 'text-foreground hover:bg-muted'}"
+							aria-current={page.url.pathname.startsWith('/products') ? 'page' : undefined}
 						>
 							<span>Katalog Produk</span>
 							<svg
@@ -301,6 +317,7 @@
 							)
 								? 'bg-primary/10 font-semibold text-primary'
 								: 'text-foreground hover:bg-muted'}"
+							aria-current={page.url.pathname.startsWith('/dashboard') ? 'page' : undefined}
 						>
 							<span>Dashboard Vault</span>
 							<svg
@@ -359,7 +376,7 @@
 	</header>
 
 	<!-- Main Page Content -->
-	<main class="flex-1">
+	<main id="main-content" tabindex="-1" class="flex-1 focus:outline-none">
 		{@render children()}
 	</main>
 
@@ -402,7 +419,7 @@
 				</div>
 
 				<!-- Links: Marketplace -->
-				<div class="space-y-2.5">
+				<nav aria-label="Tautan marketplace" class="space-y-2.5">
 					<p class="text-xs font-semibold tracking-wider text-foreground uppercase">Marketplace</p>
 					<ul class="space-y-1.5 text-xs">
 						<li>
@@ -427,7 +444,7 @@
 							>
 						</li>
 					</ul>
-				</div>
+				</nav>
 
 				<!-- Links: Security -->
 				<div class="space-y-2.5">
@@ -443,7 +460,7 @@
 				</div>
 
 				<!-- Links: Account -->
-				<div class="space-y-2.5">
+				<nav aria-label="Tautan akun pembeli" class="space-y-2.5">
 					<p class="text-xs font-semibold tracking-wider text-foreground uppercase">Akun Pembeli</p>
 					<ul class="space-y-1.5 text-xs">
 						<li>
@@ -465,7 +482,7 @@
 							>
 						</li>
 					</ul>
-				</div>
+				</nav>
 			</div>
 
 			<!-- Bottom Bar -->
