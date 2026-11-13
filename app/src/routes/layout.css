@@ -5,47 +5,86 @@
 
 :root {
 	--radius: 0.625rem;
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.145 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	--secondary: oklch(0.97 0 0);
-	--secondary-foreground: oklch(0.205 0 0);
-	--muted: oklch(0.97 0 0);
-	--muted-foreground: oklch(0.556 0 0);
-	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--destructive-foreground: oklch(0.985 0 0);
-	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
+
+	/* Brand Palette:
+	   #F7AA00 - Golden Amber (Highlights, Badges, Alert)
+	   #235784 - Deep Slate Navy (Primary Brand, Trust, Security)
+	   #40A8C4 - Vibrant Cerulean/Cyan (Accent, Interactive Focus)
+	   #EEF6F7 - Icy Pale Tint (Soft Surfaces, Secondary)
+	*/
+	--brand-gold: #f7aa00;
+	--brand-gold-foreground: #2a1b00;
+	--brand-navy: #235784;
+	--brand-navy-foreground: #ffffff;
+	--brand-cyan: #40a8c4;
+	--brand-cyan-foreground: #ffffff;
+	--brand-ice: #eef6f7;
+	--brand-ice-foreground: #184366;
+
+	/* Canvas & Layout */
+	--background: #f8fafb;
+	--foreground: #102a43;
+	--card: #ffffff;
+	--card-foreground: #102a43;
+	--popover: #ffffff;
+	--popover-foreground: #102a43;
+
+	/* Semantic Elements */
+	--primary: #235784;
+	--primary-foreground: #ffffff;
+	--secondary: #eef6f7;
+	--secondary-foreground: #1a476f;
+	--muted: #edf4f6;
+	--muted-foreground: #486581;
+	--accent: #40a8c4;
+	--accent-foreground: #ffffff;
+
+	/* Alerts & Feedback */
+	--warning: #f7aa00;
+	--warning-foreground: #2a1b00;
+	--destructive: #dc2626;
+	--destructive-foreground: #ffffff;
+
+	/* Boundaries & Controls */
+	--border: #d9e6e8;
+	--input: #d9e6e8;
+	--ring: #40a8c4;
 }
 
 .dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.145 0 0);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.145 0 0);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.985 0 0);
-	--primary-foreground: oklch(0.205 0 0);
-	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.396 0.141 25.723);
-	--destructive-foreground: oklch(0.985 0 0);
-	--border: oklch(0.269 0 0);
-	--input: oklch(0.269 0 0);
-	--ring: oklch(0.439 0 0);
+	--brand-gold: #f7aa00;
+	--brand-gold-foreground: #2a1b00;
+	--brand-navy: #306b9e;
+	--brand-navy-foreground: #ffffff;
+	--brand-cyan: #40a8c4;
+	--brand-cyan-foreground: #ffffff;
+	--brand-ice: #152d42;
+	--brand-ice-foreground: #eef6f7;
+
+	--background: #0c1a26;
+	--foreground: #eef6f7;
+	--card: #122436;
+	--card-foreground: #eef6f7;
+	--popover: #122436;
+	--popover-foreground: #eef6f7;
+
+	--primary: #40a8c4;
+	--primary-foreground: #091a27;
+	--secondary: #18334a;
+	--secondary-foreground: #eef6f7;
+	--muted: #152c40;
+	--muted-foreground: #829ab1;
+	--accent: #235784;
+	--accent-foreground: #eef6f7;
+
+	--warning: #f7aa00;
+	--warning-foreground: #2a1b00;
+	--destructive: #ef4444;
+	--destructive-foreground: #ffffff;
+
+	--border: #1e3b54;
+	--input: #1e3b54;
+	--ring: #40a8c4;
 }
 
 @theme inline {
@@ -65,9 +104,20 @@
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
 	--color-destructive-foreground: var(--destructive-foreground);
+	--color-warning: var(--warning);
+	--color-warning-foreground: var(--warning-foreground);
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
+
+	--color-brand-gold: var(--brand-gold);
+	--color-brand-gold-foreground: var(--brand-gold-foreground);
+	--color-brand-navy: var(--brand-navy);
+	--color-brand-navy-foreground: var(--brand-navy-foreground);
+	--color-brand-cyan: var(--brand-cyan);
+	--color-brand-cyan-foreground: var(--brand-cyan-foreground);
+	--color-brand-ice: var(--brand-ice);
+	--color-brand-ice-foreground: var(--brand-ice-foreground);
 
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
