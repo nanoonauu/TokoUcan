@@ -17,9 +17,25 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 	const roles = await getUserRoles(locals.supabase, user.id);
 
+	// Fetch user's orders with items
+	const { data: orders } = await locals.supabase
+		.from('orders')
+		.select('*, order_items(*)')
+		.order('created_at', { ascending: false });
+
+	// Fetch delivered or purged vault credentials
+	const { data: vaultCredentials } = await locals.supabase
+		.from('vault_credentials')
+		.select(
+			'id, product_id, order_id, credential_type, label, status, delivered_at, purge_at, purged_at'
+		)
+		.order('delivered_at', { ascending: false, nullsFirst: false });
+
 	return {
 		user,
 		profile,
-		roles
+		roles,
+		orders: orders || [],
+		vaultCredentials: vaultCredentials || []
 	};
 };

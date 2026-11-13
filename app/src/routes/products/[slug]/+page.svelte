@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { formatRupiah } from '#lib/utils.js';
-	import { Button } from '#lib/components/ui/button/index.js';
 
 	let { data } = $props();
 	const product = $derived(data.product);
@@ -151,11 +150,13 @@
 					</div>
 				</div>
 
-				<!-- Tombol Checkout (Phase 2) -->
-				<form action="/checkout" method="POST">
-					<input type="hidden" name="productId" value={product.id} />
-					<Button type="submit" size="lg" class="w-full font-semibold">Beli Sekarang</Button>
-				</form>
+				<!-- Tombol Checkout -->
+				<a
+					href="/checkout?productId={product.id}"
+					class="flex w-full items-center justify-center rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+				>
+					Beli Sekarang
+				</a>
 
 				<p class="text-center text-[11px] text-muted-foreground">
 					Wajib memiliki akun TokoUcan sebelum checkout untuk pengamanan vault.
