@@ -42,13 +42,30 @@ export async function getPublishedProducts(
 	const to = from + limit - 1;
 
 	try {
+		let categoryId: string | null = null;
+
+		if (category) {
+			const { data: catData } = await supabase
+				.from('categories')
+				.select('id')
+				.eq('slug', category)
+				.eq('is_active', true)
+				.maybeSingle();
+
+			categoryId = catData?.id ?? null;
+
+			if (!categoryId) {
+				return { products: [], total: 0, page, limit, totalPages: 0 };
+			}
+		}
+
 		let dbQuery = supabase
 			.from('products')
 			.select('*, category:categories(*)', { count: 'exact' })
 			.eq('status', 'published');
 
-		if (category) {
-			dbQuery = dbQuery.eq('category.slug', category);
+		if (categoryId) {
+			dbQuery = dbQuery.eq('category_id', categoryId);
 		}
 
 		if (search && search.trim()) {

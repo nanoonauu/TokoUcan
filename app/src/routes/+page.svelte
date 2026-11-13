@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ProductCard from '#lib/components/product-card.svelte';
+	import ProductCardSkeleton from '#lib/components/product-card-skeleton.svelte';
 	import { Button } from '#lib/components/ui/button/index.js';
 
 	let { data } = $props();
@@ -199,52 +200,64 @@
 		</div>
 
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-			{#each data.categories as category (category.id)}
-				<a
-					href="/products?category={category.slug}"
-					class="group relative flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-2xs transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-				>
-					<div>
-						<div
-							class="mb-3 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"
-						>
-							<svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			{#await data.streamed.categories}
+				{#each Array.from({ length: 4 }, (_, i) => i) as skIdx (skIdx)}
+					<div class="rounded-xl border border-border bg-card p-5 shadow-2xs">
+						<div class="mb-3 h-10 w-10 animate-pulse rounded-lg bg-muted"></div>
+						<div class="mb-2 h-4 w-32 animate-pulse rounded bg-muted"></div>
+						<div class="h-3 w-full animate-pulse rounded bg-muted"></div>
+						<div class="mt-1 h-3 w-3/4 animate-pulse rounded bg-muted"></div>
+						<div class="mt-4 h-3 w-20 animate-pulse rounded bg-muted"></div>
+					</div>
+				{/each}
+			{:then categories}
+				{#each categories as category (category.id)}
+					<a
+						href="/products?category={category.slug}"
+						class="group relative flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-2xs transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+					>
+						<div>
+							<div
+								class="mb-3 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"
+							>
+								<svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+									/>
+								</svg>
+							</div>
+							<h3
+								class="text-sm font-semibold text-foreground transition-colors group-hover:text-primary"
+							>
+								{category.name}
+							</h3>
+							<p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+								{category.description ?? 'Pilihan produk digital terverifikasi dalam kategori ini.'}
+							</p>
+						</div>
+
+						<div class="mt-4 flex items-center text-xs font-medium text-primary">
+							<span>Buka Kategori</span>
+							<svg
+								class="ml-1 size-3.5 transition-transform group-hover:translate-x-1"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
 								<path
 									stroke-linecap="round"
 									stroke-linejoin="round"
 									stroke-width="2"
-									d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+									d="M9 5l7 7-7 7"
 								/>
 							</svg>
 						</div>
-						<h3
-							class="text-sm font-semibold text-foreground transition-colors group-hover:text-primary"
-						>
-							{category.name}
-						</h3>
-						<p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-							{category.description ?? 'Pilihan produk digital terverifikasi dalam kategori ini.'}
-						</p>
-					</div>
-
-					<div class="mt-4 flex items-center text-xs font-medium text-primary">
-						<span>Buka Kategori</span>
-						<svg
-							class="ml-1 size-3.5 transition-transform group-hover:translate-x-1"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-					</div>
-				</a>
-			{/each}
+					</a>
+				{/each}
+			{/await}
 		</div>
 	</div>
 </section>
@@ -270,17 +283,25 @@
 
 			<a href="/products">
 				<Button variant="outline" size="sm" class="text-xs font-medium">
-					Buka Katalog Lengkap ({data.featuredProducts.length}+)
+					Buka Katalog Lengkap
 				</Button>
 			</a>
 		</div>
 
 		<!-- Product Grid -->
-		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			{#each data.featuredProducts as product (product.id)}
-				<ProductCard {product} />
-			{/each}
-		</div>
+		{#await data.streamed.featuredProducts}
+			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{#each Array.from({ length: 6 }, (_, i) => i) as skIdx (skIdx)}
+					<ProductCardSkeleton />
+				{/each}
+			</div>
+		{:then featuredProducts}
+			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{#each featuredProducts as product (product.id)}
+					<ProductCard {product} />
+				{/each}
+			</div>
+		{/await}
 
 		<!-- Bottom Catalog Banner -->
 		<div

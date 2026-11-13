@@ -13,14 +13,11 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 	const query = catalogQuerySchema.parse(rawParams);
 
-	const [categories, catalogResult] = await Promise.all([
-		getActiveCategories(locals.supabase),
-		getPublishedProducts(locals.supabase, query)
-	]);
-
 	return {
-		categories,
-		catalogResult,
-		query
+		query,
+		streamed: {
+			categories: getActiveCategories(locals.supabase),
+			catalogResult: getPublishedProducts(locals.supabase, query)
+		}
 	};
 };
